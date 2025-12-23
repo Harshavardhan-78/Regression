@@ -17,18 +17,22 @@ load_css("style.css")
 st.markdown("""
     <div class="card">
             <h1>Linear Regression</h1>
-            <p>Predict<b>Tip Amount</b>from <b>Total Bill</b> using Linear Regression....</p>
+            <p>Predict <b>Tip Amount </b>from <b>Total Bill</b> using Linear Regression....</p>
     </div>
             """,unsafe_allow_html=True)
+
+# Load Data #
 @st.cache_data
 def load_data():
     return sns.load_dataset("tips")
 df=load_data()
+
+# Dataset Preview #
 st.markdown('<div class="card">',unsafe_allow_html=True)
 st.subheader("Dataset preview")
 st.dataframe(df.head())
 st.markdown('</div>',unsafe_allow_html=True)
-#prepare data
+
 # prepare the data
 
 x,y = df[["total_bill"]],df["tip"]
@@ -62,22 +66,24 @@ ax.set_xlabel("Total Bill")
 ax.set_ylabel("Tip Amount")
 st.pyplot(fig)
 st.markdown('<div>',unsafe_allow_html=True)
-#performance
-st.markdown('<div class = "card">',unsafe_allow_html=True)
-st.subheader("model performance")
+
+# Performance #
+st.markdown('<div class="card">',unsafe_allow_html=True)
+st.subheader("Model performnace")
 c1,c2=st.columns(2)
-c1.metric("MAE",f"{mae:.2f}")
+c1.metric('MAE',f"{mae:.2f}")
 c2.metric("RMSE",f"{rmse:.2f}")
 c3,c4=st.columns(2)
-c3.metric("r2",f"{r2:.2f}")
-c4.metric("adj r2",f"{adj_r2:.3f}")
-st.markdown('</div',unsafe_allow_html=True)
-#m and c
+c3.metric("R2",f"{r2:.3f}")
+c4.metric("adj R2",f"{adj_r2:.3f}")
+st.markdown('</div>',unsafe_allow_html=True)
+
+# m & c #
 st.markdown(f"""
-        <div class="card">
-            <h3> Model Intercept & coefficient</h3>
-            <p><b> Co-effficient:</b>{model.coef_[0]:.3f}<br>
-            <b>Intercept</b>{model.intercept_:.3f}</p>
+            <div class="card">
+            <h3> Model Intercept & Co-efficient</h3>
+            <p> <b> Co-efficient: </b> {model.coef_[0]:.3f}<br>
+            <b> Intercept: </b> {model.intercept_:.3f}</p>
             </div>
             """,unsafe_allow_html=True)
 #prediction
