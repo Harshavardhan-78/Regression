@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,10 +10,17 @@ from sklearn.metrics import mean_absolute_error,r2_score,classification_report,m
 # page configuration
 st.set_page_config("Linear Regression",layout="centered")
 #load css
+
+
 def load_css(file):
-    with open(file) as f:
-        st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html=True)
+    base_path = os.path.dirname(__file__)
+    css_path = os.path.join(base_path, file)
+
+    with open(css_path) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 load_css("style.css")
+
 #Title 
 st.markdown("""
     <div class="card">
