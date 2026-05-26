@@ -44,7 +44,7 @@ if uploaded_file is not None:
     y = df[target_column]
 
     # Handle Missing Values
-    X = X.fillna(method='ffill')
+    X = X.ffill()
 
     # Convert categorical columns
     X = pd.get_dummies(X, drop_first=True)
